@@ -12,5 +12,5 @@ pluginManagement {
     }
 }
 
-rootProject.name = 'MultiLoader'
-include("Common", "Fabric", "Forge")
+rootProject.name = 'Spleaves'
+include("Common", "Fabric") // TODO: Re-add forge, when solution figured out for oxidization

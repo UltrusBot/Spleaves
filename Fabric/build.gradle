@@ -2,15 +2,19 @@ plugins {
     id 'fabric-loom' version '0.12-SNAPSHOT'
     id 'maven-publish'
     id 'idea'
+    id "io.github.p03w.machete" version "1.1.2"
+    id "com.github.breadmoirai.github-release" version "2.4.1"
+    id "com.modrinth.minotaur" version "2.+"
+    id 'com.matthewprenger.cursegradle' version '1.4.0'
 }
 
 archivesBaseName = "${mod_name}-fabric-${minecraft_version}"
 
 dependencies {
-    minecraft "com.mojang:minecraft:${minecraft_version}"
+    minecraft libs.minecraft
     mappings loom.officialMojangMappings()
-    modImplementation "net.fabricmc:fabric-loader:${fabric_loader_version}"
-    modImplementation "net.fabricmc.fabric-api:fabric-api:${fabric_version}"
+    modImplementation libs.fabric.loader
+    modImplementation libs.fabric.api
     implementation group: 'com.google.code.findbugs', name: 'jsr305', version: '3.0.1'
     implementation project(":Common")
 }
@@ -29,14 +33,68 @@ loom {
             ideConfigGenerated(true)
             runDir("run")
         }
+        register("DatagenCommon") {
+            inherit client
+            name "Fabric Datagen Common"
+            vmArg "-Dfabric-api.datagen"
+            vmArg "-Dfabric-api.datagen.output-dir=${file("../Common/src/generated/resources")}"
+            vmArg "-Dfabric-api.datagen.modid=${mod_id}"
+
+            runDir = "build/datagen"
+        }
     }
 }
 
+githubRelease {
+    if (System.getenv("GH_TOKEN") != null) {
+        authorization = "Token ${System.getenv("GH_TOKEN")}"
+    }
+    owner = "UltrusBot"
+    repo = "Spleaves"
+    targetCommitish = "1.19.2"
+    tagName = "v${project.version}-fabric"
+    releaseName = "${project.mod_name} v${project.version} Fabric/Quilt"
+    body = new File("$rootDir/CHANGELOG.md").getText('UTF-8')
+    releaseAssets = [remapJar, sourcesJar, javadocJar]
+}
+modrinth {
+    if (System.getenv("MODRINTH_TOKEN") != null) {
+        token = System.getenv("MODRINTH_TOKEN")
+    }
+    projectId = "spleaves"
+    versionType = "release"
+    uploadFile = remapJar
+    changelog = new File("$rootDir/CHANGELOG.md").getText('UTF-8')
+    versionNumber ="v${project.version}"
+    versionName = "${project.mod_name} v${project.version} Fabric/Quilt"
+    gameVersions = ["1.19.2"]
+    loaders = ["quilt", "fabric"]
+    syncBodyFrom = rootProject.file("README.md").text
+}
+curseforge {
+    if (System.getenv("CF_API_KEY") != null) {
+        apiKey = System.getenv("CF_API_KEY")
+
+    }
+    project {
+        id = "856291"
+        changelogType = "markdown"
+        changelog = new File("$rootDir/CHANGELOG.md").getText('UTF-8')
+        releaseType = "release"
+        addGameVersion "1.19.2"
+        addGameVersion "Fabric"
+        addGameVersion "Quilt"
+        mainArtifact(remapJar) {
+            displayName = "${project.mod_name} v${project.version} Fabric/Quilt"
+
+        }
+    }
+}
 
 processResources {
     from project(":Common").sourceSets.main.resources
     inputs.property "version", project.version
-
+    exclude(".cache")
     filesMatching("fabric.mod.json") {
         expand "version": project.version
     }

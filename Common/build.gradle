@@ -35,6 +35,11 @@ processResources {
         expand buildProps
     }
 }
+sourceSets {
+    named("main") {
+        resources.srcDir("src/generated/resources")
+    }
+}
 
 publishing {
     publications {

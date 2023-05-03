@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "breaking=false": {
+      "model": "spleaves:block/weathered_copper_spleaves"
+    },
+    "breaking=true": {
+      "model": "spleaves:block/weathered_copper_spleaves_breaking"
+    }
+  }
+}

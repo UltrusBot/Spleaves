@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "C": {
+      "item": "minecraft:copper_ingot"
+    }
+  },
+  "pattern": [
+    "C C",
+    " C ",
+    "C C"
+  ],
+  "result": {
+    "count": 4,
+    "item": "spleaves:copper_spleaves"
+  }
+}

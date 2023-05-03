@@ -1,0 +1,19 @@
+[versions]
+minecraft = "1.19.2"
+fabric_loader = "0.14.12"
+fabric_api = "0.71.0+1.19.2"
+forge = "1.19.2-43.2.0"
+
+
+
+
+
+[libraries]
+minecraft = { module = "com.mojang:minecraft", version.ref = "minecraft" }
+fabric_loader = { module = "net.fabricmc:fabric-loader", version.ref = "fabric_loader" }
+fabric_api = { module = "net.fabricmc.fabric-api:fabric-api", version.ref = "fabric_api" }
+forge = { module = "net.minecraftforge:forge", version.ref = "forge" }
+
+
+
+#[plugins]

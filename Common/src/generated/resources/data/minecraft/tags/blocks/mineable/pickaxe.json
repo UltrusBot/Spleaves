@@ -1,0 +1,21 @@
+{
+  "replace": false,
+  "values": [
+    "spleaves:copper_spleaves",
+    "spleaves:exposed_copper_spleaves",
+    "spleaves:weathered_copper_spleaves",
+    "spleaves:oxidized_copper_spleaves",
+    "spleaves:waxed_copper_spleaves",
+    "spleaves:waxed_exposed_copper_spleaves",
+    "spleaves:waxed_weathered_copper_spleaves",
+    "spleaves:waxed_oxidized_copper_spleaves",
+    "spleaves:reinforced_copper_spleaves",
+    "spleaves:exposed_reinforced_copper_spleaves",
+    "spleaves:weathered_reinforced_copper_spleaves",
+    "spleaves:oxidized_reinforced_copper_spleaves",
+    "spleaves:waxed_reinforced_copper_spleaves",
+    "spleaves:waxed_exposed_reinforced_copper_spleaves",
+    "spleaves:waxed_weathered_reinforced_copper_spleaves",
+    "spleaves:waxed_oxidized_reinforced_copper_spleaves"
+  ]
+}

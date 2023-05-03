@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "spleaves:block/oxidized_copper_spleaves_breaking"
+  }
+}
